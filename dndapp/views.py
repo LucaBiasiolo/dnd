@@ -1,4 +1,5 @@
 from django.http import HttpResponse
 
-def home(request):
-    return HttpResponse("Hello, Django!")
+
+def index(request):
+    return HttpResponse("Hello, world. You're at the dndapp index.")
