@@ -1,11 +1,11 @@
-from Die import Die
+from src.Die import Die
 
 class Oracle:
     
     _die: Die
     _likelihood: int = 0
 
-    def __init__(self, likelihood):
+    def __init__(self, likelihood: int):
         self._die = Die(1,20)
         self._likelihood = likelihood
 
