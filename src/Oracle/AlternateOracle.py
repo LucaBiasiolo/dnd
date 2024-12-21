@@ -1,4 +1,4 @@
-from Oracle import Oracle
+from src.Oracle.Oracle import Oracle
 
 class AlternateOracle(Oracle):
     

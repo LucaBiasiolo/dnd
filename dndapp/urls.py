@@ -5,8 +5,8 @@ from . import views
 urlpatterns = [
     path("dndapp/", views.dndapp, name="home"),
     path("dndapp/dice", views.dice, name="dice"),
-    path("dndapp/oracolo", views.oracolo, name="oracle"),
-    path('oracolo_base/', views.oracolo_base, name='oracolo_base'),
-    path('oracolo_migliorato/', views.oracolo_migliorato, name='oracolo_migliorato'),
-    path('oracolo_alternativo/', views.oracolo_alternativo, name='oracolo_alternativo'),
+    path("dndapp/oracle", views.oracle, name="oracle"),
+    path("dndapp/oracle/oracolo_base/", views.oracolo_base, name='oracolo_base'),
+    path("dndapp/oracle/oracolo_migliorato/", views.oracolo_migliorato, name='oracolo_migliorato'),
+    path("dndapp/oracle/oracolo_alternativo/", views.oracolo_alternativo, name='oracolo_alternativo'),
 ]

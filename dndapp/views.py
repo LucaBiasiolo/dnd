@@ -1,7 +1,10 @@
-from django.http import HttpResponse
+from django.http import HttpRequest, HttpResponse
 from django.template import loader
+from django.views.decorators.csrf import csrf_exempt
 
 from src.Oracle.Oracle import Oracle
+from src.Oracle.ImprovedOracle import ImprovedOracle
+from src.Oracle.AlternateOracle import AlternateOracle
 
 def dndapp(request):
   template = loader.get_template('home.html')
@@ -11,19 +14,24 @@ def dice(request):
   template = loader.get_template('dice.html')
   return HttpResponse(template.render())
 
-def oracolo(request):
+def oracle(request):
   template = loader.get_template('oracle.html')
   return HttpResponse(template.render())
 
-def oracolo_base(request):
-    
-    oracolo = Oracle(0)
-    return HttpResponse("Risultato oracolo: " + oracolo.consult())
+@csrf_exempt
+def oracolo_base(request: HttpRequest):
+    likelihood = request.POST.get('likelihood')
+    oracle = Oracle(int(likelihood))
+    return HttpResponse("The Oracle answered: " + oracle.consult())
 
-def oracolo_migliorato(request):
-    # Call your Python function here
-    return HttpResponse("Oracolo migliorato function triggered")
+@csrf_exempt
+def oracolo_migliorato(request: HttpRequest):
+    likelihood = request.POST.get('likelihood')
+    improved_oracle = ImprovedOracle(int(likelihood))
+    return HttpResponse("The Oracle answered: " + improved_oracle.consult())
 
-def oracolo_alternativo(request):
-    # Call your Python function here
-    return HttpResponse("Oracolo alternativo function triggered")
+@csrf_exempt
+def oracolo_alternativo(request: HttpRequest):
+    likelihood = request.POST.get('likelihood')
+    alternate_oracle = AlternateOracle(int(likelihood))
+    return HttpResponse("The Oracle answered: " + alternate_oracle.consult())

@@ -3,10 +3,31 @@
 <body>
 
 <p>Quale oracolo vuoi consultare?</p>
+<label for="likelihood">Enter likelihood:</label>
+<input type="number" id="likelihood" name="likelihood" min="-10" max="10" form="oracleForm">
+
 <ol>
-    <li><button onclick="location.href='{% url 'oracolo_base' %}'">Oracolo base</button></li>
-    <li><button onclick="location.href='{% url 'oracolo_migliorato' %}'">Oracolo migliorato</button></li>
-    <li><button onclick="location.href='{% url 'oracolo_alternativo' %}'">Oracolo alternativo</button></li>
+    <li>
+        <form id="oracleForm" action="{% url 'oracolo_base' %}?likelihood=likelihood" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="likelihood" id="likelihoodInput">
+            <button type="submit" onclick="document.getElementById('likelihoodInput').value = document.getElementById('likelihood').value;">Oracolo base</button>
+        </form>
+    </li>
+    <li>
+        <form action="{% url 'oracolo_migliorato' %}?likelihood=likelihood" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="likelihood" id="likelihoodInput2">
+            <button type="submit" onclick="document.getElementById('likelihoodInput2').value = document.getElementById('likelihood').value;">Oracolo migliorato</button>
+        </form>
+    </li>
+    <li>
+        <form action="{% url 'oracolo_alternativo' %}?likelihood=likelihood" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="likelihood" id="likelihoodInput3">
+            <button type="submit" onclick="document.getElementById('likelihoodInput3').value = document.getElementById('likelihood').value;">Oracolo alternativo</button>
+        </form>
+    </li>
 </ol>
 
 </body>
