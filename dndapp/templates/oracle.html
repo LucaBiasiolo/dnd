@@ -10,17 +10,18 @@
 
 <body>
     <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
-        <div>  
+        <div>
+        <a href="/dndapp" class="link">Home</a>
         <p>Quale oracolo vuoi consultare?</p>
         <label for="likelihood">Enter likelihood:</label>
         <input type="number" id="likelihood" name="likelihood" min="-10" max="10" form="oracleForm">
 
-        <ol>
+        <ul>
             <li>
                 <form id="oracleForm" action="{% url 'oracolo_base' %}?likelihood=likelihood" method="post">
                     {% csrf_token %}
                     <input type="hidden" name="likelihood" id="likelihoodInput">
-                    <button type="submit"
+                    <button type="submit" class="btn btn-primary"
                         onclick="document.getElementById('likelihoodInput').value = document.getElementById('likelihood').value;">Oracolo
                         base</button>
                 </form>
@@ -29,7 +30,7 @@
                 <form action="{% url 'oracolo_migliorato' %}?likelihood=likelihood" method="post">
                     {% csrf_token %}
                     <input type="hidden" name="likelihood" id="likelihoodInput2">
-                    <button type="submit"
+                    <button type="submit" class="btn btn-primary"
                         onclick="document.getElementById('likelihoodInput2').value = document.getElementById('likelihood').value;">Oracolo
                         migliorato</button>
                 </form>
@@ -38,12 +39,12 @@
                 <form action="{% url 'oracolo_alternativo' %}?likelihood=likelihood" method="post">
                     {% csrf_token %}
                     <input type="hidden" name="likelihood" id="likelihoodInput3">
-                    <button type="submit"
+                    <button type="submit" class="btn btn-primary"
                         onclick="document.getElementById('likelihoodInput3').value = document.getElementById('likelihood').value;">Oracolo
                         alternativo</button>
                 </form>
             </li>
-        </ol>
+        </ul>
     </div>
 </div>
 </body>
