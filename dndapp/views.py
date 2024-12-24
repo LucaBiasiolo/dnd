@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from src.Oracle.Oracle import Oracle
 from src.Oracle.ImprovedOracle import ImprovedOracle
 from src.Oracle.AlternateOracle import AlternateOracle
+from src.Die import Die
 
 def dndapp(request):
   template = loader.get_template('home.html')
@@ -35,3 +36,10 @@ def oracolo_alternativo(request: HttpRequest):
     likelihood = request.POST.get('likelihood')
     alternate_oracle = AlternateOracle(int(likelihood))
     return HttpResponse("The Oracle answered: " + alternate_oracle.consult())
+
+@csrf_exempt
+def lancia_dadi(request: HttpRequest):
+   number_of_dice = int(request.POST.get('diceNumber'))
+   type_of_dice = int(request.POST.get('diceType'))
+   dice = Die(number_of_dice, type_of_dice)
+   return HttpResponse("Dice launch result: " + str(dice.throw()))

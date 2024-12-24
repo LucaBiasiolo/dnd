@@ -5,7 +5,7 @@ class Die:
     __quantity: int
     __type:int
 
-    def __init__(self, quantity, type):
+    def __init__(self, quantity: int, type: int):
         self.__quantity = quantity
         self.__type = type
 
