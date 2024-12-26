@@ -39,7 +39,12 @@ def oracolo_alternativo(request: HttpRequest):
 
 @csrf_exempt
 def lancia_dadi(request: HttpRequest):
-   number_of_dice = int(request.POST.get('diceNumber'))
-   type_of_dice = int(request.POST.get('diceType'))
-   dice = Die(number_of_dice, type_of_dice)
-   return HttpResponse("Dice launch result: " + str(dice.throw()))
+  number_of_dice = int(request.POST.get('diceNumber'))
+  type_of_dice = int(request.POST.get('diceType'))
+  dice = Die(number_of_dice, type_of_dice)
+
+  template = loader.get_template('dice.html')
+  context = {
+      'result': str(dice.throw())
+  }
+  return HttpResponse(template.render(context, request))
