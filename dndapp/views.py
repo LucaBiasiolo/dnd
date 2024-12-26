@@ -20,38 +20,24 @@ def oracle(request):
   return HttpResponse(template.render())
 
 @csrf_exempt
-def oracolo_base(request: HttpRequest):
-    likelihood = request.POST.get('likelihood')
+def consult_oracle(request: HttpRequest):
+  likelihood = request.POST.get('likelihood')
+  oracle_type = request.POST.get("oracle_type")
 
-    oracle = Oracle(int(likelihood))
-    
-    template = loader.get_template('oracle.html')
-    context = {
-       'result': oracle.consult()
-    }
-    return HttpResponse(template.render(context, request))
+  oracle = {}
+  match oracle_type:
+    case "base":
+      oracle = Oracle(int(likelihood))
+    case "improved":
+      oracle = ImprovedOracle(int(likelihood))
+    case "alternate":
+      oracle = AlternateOracle(int(likelihood))
 
-@csrf_exempt
-def oracolo_migliorato(request: HttpRequest):
-    likelihood = request.POST.get('likelihood')
-    improved_oracle = ImprovedOracle(int(likelihood))
-
-    template = loader.get_template('oracle.html')
-    context = {
-       'result': improved_oracle.consult()
-    }
-    return HttpResponse(template.render(context, request))
-
-@csrf_exempt
-def oracolo_alternativo(request: HttpRequest):
-    likelihood = request.POST.get('likelihood')
-    alternate_oracle = AlternateOracle(int(likelihood))
-
-    template = loader.get_template('oracle.html')
-    context = {
-       'result': alternate_oracle.consult()
-    }
-    return HttpResponse(template.render(context, request))
+  template = loader.get_template('oracle.html')
+  context = {
+      'result': oracle.consult()
+  }
+  return HttpResponse(template.render(context, request))
 
 @csrf_exempt
 def lancia_dadi(request: HttpRequest):

@@ -13,38 +13,24 @@
         <div>
         <a href="/dndapp" class="link">Home</a>
         <p>Which oracle do you want to consult?</p>
-        <label for="likelihood">Enter likelihood:</label>
-        <input type="number" id="likelihood" name="likelihood" min="-10" max="10" value="0" form="oracleForm">
-
-        <ul>
-            <li>
-                <form id="oracleForm" action="{% url 'oracolo_base' %}" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="likelihood" id="likelihoodInput">
-                    <button type="submit" class="btn btn-primary"
-                        onclick="document.getElementById('likelihoodInput').value = document.getElementById('likelihood').value;">Base Oracle</button>
-                </form>
-            </li>
-            <li>
-                <form action="{% url 'oracolo_migliorato' %}" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="likelihood" id="likelihoodInput2">
-                    <button type="submit" class="btn btn-primary"
-                        onclick="document.getElementById('likelihoodInput2').value = document.getElementById('likelihood').value;">Improved Oracle</button>
-                </form>
-            </li>
-            <li>
-                <form action="{% url 'oracolo_alternativo' %}" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="likelihood" id="likelihoodInput3">
-                    <button type="submit" class="btn btn-primary"
-                        onclick="document.getElementById('likelihoodInput3').value = document.getElementById('likelihood').value;">Alternate Oracle</button>
-                </form>
-            </li>
-        </ul>
+        <form id="oracleForm" action="{% url 'consult_oracle' %}" method="post">
+            {% csrf_token %}
+            <label for="likelihood">Enter likelihood:</label>
+            <input type="number" id="likelihood" name="likelihood" min="-10" max="10" value="0" form="oracleForm">
+            <p>
+                <label for="oracle_type">Choose Oracle:</label>
+                <select name="oracle_type">
+                    <option value="base">Base Oracle</option>
+                    <option value="improved">Improved Oracle</option>
+                    <option value="alternate">Alternate Oracle</option>
+                </select>
+            </p>
+            <button type="submit" class="btn btn-primary">Consult Oracle</button>
+        </form>
         {% if result %}
-            <div>Result: {{result}}</div>
+        <p>Result: {{result}}</p>
         {% endif %}
+        </div>
     </div>
 </div>
 </body>
