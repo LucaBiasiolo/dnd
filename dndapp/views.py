@@ -40,7 +40,7 @@ def consult_oracle(request: HttpRequest):
   return HttpResponse(template.render(context, request))
 
 @csrf_exempt
-def lancia_dadi(request: HttpRequest):
+def throw_dice(request: HttpRequest):
   number_of_dice = int(request.POST.get('diceNumber'))
   type_of_dice = int(request.POST.get('diceType'))
   dice = Die(number_of_dice, type_of_dice)
