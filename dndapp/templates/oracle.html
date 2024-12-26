@@ -12,39 +12,39 @@
     <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
         <div>
         <a href="/dndapp" class="link">Home</a>
-        <p>Quale oracolo vuoi consultare?</p>
+        <p>Which oracle do you want to consult?</p>
         <label for="likelihood">Enter likelihood:</label>
-        <input type="number" id="likelihood" name="likelihood" min="-10" max="10" form="oracleForm">
+        <input type="number" id="likelihood" name="likelihood" min="-10" max="10" value="0" form="oracleForm">
 
         <ul>
             <li>
-                <form id="oracleForm" action="{% url 'oracolo_base' %}?likelihood=likelihood" method="post">
+                <form id="oracleForm" action="{% url 'oracolo_base' %}" method="post">
                     {% csrf_token %}
                     <input type="hidden" name="likelihood" id="likelihoodInput">
                     <button type="submit" class="btn btn-primary"
-                        onclick="document.getElementById('likelihoodInput').value = document.getElementById('likelihood').value;">Oracolo
-                        base</button>
+                        onclick="document.getElementById('likelihoodInput').value = document.getElementById('likelihood').value;">Base Oracle</button>
                 </form>
             </li>
             <li>
-                <form action="{% url 'oracolo_migliorato' %}?likelihood=likelihood" method="post">
+                <form action="{% url 'oracolo_migliorato' %}" method="post">
                     {% csrf_token %}
                     <input type="hidden" name="likelihood" id="likelihoodInput2">
                     <button type="submit" class="btn btn-primary"
-                        onclick="document.getElementById('likelihoodInput2').value = document.getElementById('likelihood').value;">Oracolo
-                        migliorato</button>
+                        onclick="document.getElementById('likelihoodInput2').value = document.getElementById('likelihood').value;">Improved Oracle</button>
                 </form>
             </li>
             <li>
-                <form action="{% url 'oracolo_alternativo' %}?likelihood=likelihood" method="post">
+                <form action="{% url 'oracolo_alternativo' %}" method="post">
                     {% csrf_token %}
                     <input type="hidden" name="likelihood" id="likelihoodInput3">
                     <button type="submit" class="btn btn-primary"
-                        onclick="document.getElementById('likelihoodInput3').value = document.getElementById('likelihood').value;">Oracolo
-                        alternativo</button>
+                        onclick="document.getElementById('likelihoodInput3').value = document.getElementById('likelihood').value;">Alternate Oracle</button>
                 </form>
             </li>
         </ul>
+        {% if result %}
+            <div>Result: {{result}}</div>
+        {% endif %}
     </div>
 </div>
 </body>

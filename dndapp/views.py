@@ -22,20 +22,36 @@ def oracle(request):
 @csrf_exempt
 def oracolo_base(request: HttpRequest):
     likelihood = request.POST.get('likelihood')
+
     oracle = Oracle(int(likelihood))
-    return HttpResponse("The Oracle answered: " + oracle.consult())
+    
+    template = loader.get_template('oracle.html')
+    context = {
+       'result': oracle.consult()
+    }
+    return HttpResponse(template.render(context, request))
 
 @csrf_exempt
 def oracolo_migliorato(request: HttpRequest):
     likelihood = request.POST.get('likelihood')
     improved_oracle = ImprovedOracle(int(likelihood))
-    return HttpResponse("The Oracle answered: " + improved_oracle.consult())
+
+    template = loader.get_template('oracle.html')
+    context = {
+       'result': improved_oracle.consult()
+    }
+    return HttpResponse(template.render(context, request))
 
 @csrf_exempt
 def oracolo_alternativo(request: HttpRequest):
     likelihood = request.POST.get('likelihood')
     alternate_oracle = AlternateOracle(int(likelihood))
-    return HttpResponse("The Oracle answered: " + alternate_oracle.consult())
+
+    template = loader.get_template('oracle.html')
+    context = {
+       'result': alternate_oracle.consult()
+    }
+    return HttpResponse(template.render(context, request))
 
 @csrf_exempt
 def lancia_dadi(request: HttpRequest):
